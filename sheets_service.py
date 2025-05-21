@@ -10,7 +10,7 @@ def get_gspread_client():
 
 def read_records(sheet_name):
     client = get_gspread_client()
-    spreadsheet_id = st.secrets["spreadsheet_id"]  # Ambil langsung dari root secrets
+    spreadsheet_id = st.secrets["gcp_service_account"]["spreadsheet_id"]
     sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
     records = sheet.get_all_records()
     return pd.DataFrame(records)
