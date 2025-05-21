@@ -28,10 +28,3 @@ Dirancang agar ringan, fleksibel, dan siap diintegrasikan dengan AI untuk analis
 | AI (opsional)  | Gemini API / OpenAI    |
 
 ---
-
-## ⚙️ Instalasi & Setup Lokal
-
-### 1. Clone Repository
-```bash
-git clone https://github.com/username/Arlen-PersonalFinanceApp.git
-cd Arlen-PersonalFinanceApp
