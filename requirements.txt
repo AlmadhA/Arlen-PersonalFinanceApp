@@ -3,3 +3,5 @@ gspread
 oauth2client
 streamlit-authenticator
 plotly
+google-auth
+pandas

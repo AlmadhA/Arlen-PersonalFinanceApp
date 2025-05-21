@@ -1,22 +1,16 @@
+import streamlit as st
+from google.oauth2 import service_account
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-from config import GOOGLE_CREDENTIALS_PATH, SPREADSHEET_ID
+import pandas as pd
 
-def get_gsheet_client():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDENTIALS_PATH, scope)
-    client = gspread.authorize(creds)
-    return client
-
-def get_sheet(sheet_name):
-    client = get_gsheet_client()
-    spreadsheet = client.open_by_key(SPREADSHEET_ID)
-    return spreadsheet.worksheet(sheet_name)
+def get_gspread_client():
+    creds_info = st.secrets["gcp_service_account"]
+    creds = service_account.Credentials.from_service_account_info(creds_info)
+    return gspread.authorize(creds)
 
 def read_records(sheet_name):
-    sheet = get_sheet(sheet_name)
-    return sheet.get_all_records()
-
-def append_row(sheet_name, row):
-    sheet = get_sheet(sheet_name)
-    sheet.append_row(row)
+    client = get_gspread_client()
+    spreadsheet_id = st.secrets["gcp_service_account"]["spreadsheet_id"]
+    sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
+    records = sheet.get_all_records()
+    return pd.DataFrame(records)
