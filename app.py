@@ -24,8 +24,8 @@ def login_page():
                 st.session_state['logged_in'] = True
                 st.session_state['username'] = username
                 st.session_state['fullname'] = user_row.iloc[0]['Nama Lengkap']
-                st.success(f"Login berhasil! Selamat datang {st.session_state['fullname']}")
-                st.experimental_rerun()  # Refresh halaman agar pindah ke dashboard
+                st.experimental_rerun()
+                return  # Hindari error dengan return setelah rerun
             else:
                 st.error("Kode User atau Password salah.")
 
