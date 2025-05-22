@@ -61,6 +61,7 @@ def main_page():
         except Exception as e:
             st.error("Gagal menyimpan data:")
             st.exception(e)
+            
     elif page == "Dashboard":
         st.header("Dashboard Page")
         # Tambahkan tampilan dashboard disini
